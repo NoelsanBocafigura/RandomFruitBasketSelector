@@ -1,0 +1,41 @@
+# Fruit Basket Simulation
+# This script simulates selecting fruits from a pile and adding them to a basket
+# until the basket reaches its maximum capacity.
+
+import random
+
+# --- Configuration ---
+fruit_pile = ["Apple", "Banana", "Mango", "Orange", "Strawberry", "Durian", "Jackfruit", "Grapes"]
+max_basket_size = 5 # Defines the maximum number of fruits the basket can hold.
+
+# --- Game State Variables ---
+basket = "" # Stores the selected fruits as a comma-separated string.
+basket_limit = 0 # Tracks the current number of fruits in the basket.
+game_turn = 0 # Counts the turns/iterations of the selection process.
+
+# Main simulation loop: Continues adding fruits until the basket is full.
+while True:
+    # Check if there's still space in the basket
+    if basket_limit < max_basket_size:
+        selected_fruit = random.choice(fruit_pile) # Randomly pick a fruit from the pile.
+        basket_limit += 1 # Increment the count of fruits in the basket.
+        game_turn += 1    # Advance the game turn.
+
+        print(f"Turn {game_turn}") # Display the current turn number for user feedback.
+        
+        # Add the selected fruit to the basket string.
+        # Handles the first fruit without a preceding comma, subsequent fruits with a comma.
+        if not basket:
+            basket = selected_fruit
+        else:    
+            basket += ", " + selected_fruit
+            
+        print(f'Basket current contents: "{basket}"\n') # Display basket contents after each addition.
+
+    else:
+        # Basket is full, terminate the simulation loop.
+        print("Basket is full!\nExiting the loop...\n")
+        break
+
+# Display the final contents of the basket after the simulation ends.
+print(f"The basket contains: {basket}")
